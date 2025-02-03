@@ -19,7 +19,7 @@ const BookFormModal: React.FC<ModalProps> = ({ onClose }) => {
           </label>
 
           <label>
-            Número de Páginas: &#40;Opcional&#41; <input type="number" />
+            Número de Páginas: &#40;Opcional&#41; <input type="text" />
           </label>
 
           <button type="submit">Salvar</button>

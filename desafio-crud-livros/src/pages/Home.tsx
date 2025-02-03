@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/css/home.css'
+import '../assets/css/home.css';
 import { Link } from 'react-router-dom';
 
 function Home() {
@@ -13,8 +13,8 @@ function Home() {
         <Link to="/books">
           <button className='home-button'>Lista de Livros</button>
         </Link>
-        <Link to="/books-form">
-          <button className='home-button'>Adicionar Livros</button>
+        <Link to="/authors">
+          <button className='home-button'>Lista de Autores</button>
         </Link>
       </div>
     </main>

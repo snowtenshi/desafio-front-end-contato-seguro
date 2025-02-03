@@ -10,6 +10,10 @@ const BookFormModal: React.FC<ModalProps> = ({ onClose }) => {
     <div className="modal-container">
       <div className="modal-content">
         <form>
+        <label>
+            ID do Livro: <input type="text" required />
+          </label>
+
           <label>
             Nome do Livro: <input type="text" required />
           </label>

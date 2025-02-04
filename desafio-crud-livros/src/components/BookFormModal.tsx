@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/css/modal.css";
+import "../assets/css/form.css";
 
 interface ModalProps {
   onClose: () => void;
@@ -23,15 +24,14 @@ const BookFormModal: React.FC<ModalProps> = ({ onClose }) => {
           </label>
 
           <label>
-            Número de Páginas: &#40;Opcional&#41; <input type="text" />
+            Número de Páginas &#40;Opcional&#41;: <input type="text" />
           </label>
-
-          <button type="submit">Salvar</button>
         </form>
 
-        <button className="close-button" onClick={onClose}>
-          Fechar
-        </button>
+        <div className="button-container">
+          <button className="save-button" type="submit">Salvar</button>
+          <button className="close-button" onClick={onClose}>Fechar</button>
+        </div>
       </div>
     </div>
   );

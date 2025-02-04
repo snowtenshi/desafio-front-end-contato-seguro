@@ -1,0 +1,21 @@
+.modal-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.modal-content {
+  border: 2px solid rgba(143, 146, 146, 0.463);
+  box-shadow: rgba(213, 217, 217, 0.468) 0 10px 10px 0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40rem;
+  height: 22rem;
+  gap: 2rem;
+}
+
+.save-button {
+  color: var(--save-button-color);
+}

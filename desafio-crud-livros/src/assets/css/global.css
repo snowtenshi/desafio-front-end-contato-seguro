@@ -4,6 +4,10 @@
 :root {
   --font-text: "Poppins", sans-serif;
   --font-title: "Merriweather", serif;
+
+  --primary-color: rgb(58, 123, 220);
+  --button-color: rgb(25, 159, 227);
+  
 }
 
 * {
@@ -28,7 +32,7 @@ button {
   background-color:white;
   font-family: var(--font-text);
   font-size: medium;
-  color: rgb(142, 142, 239);
+  color: var(--button-color);
   box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
 }
 

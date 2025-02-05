@@ -10,11 +10,13 @@ const BooksListPage: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
-    const storedBooks = localStorage.getItem("books");
-    if (storedBooks) {
-      setBooks(JSON.parse(storedBooks));
+    if (books.length === 0) {
+      const storedBooks = localStorage.getItem("books");
+      if (storedBooks) {
+        setBooks(JSON.parse(storedBooks));
+      }
     }
-  }, []);
+  }, [books]);
 
   const handleDelete = (id: string) => {
     const confirmDelete = window.confirm(
@@ -46,47 +48,55 @@ const BooksListPage: React.FC = () => {
         </Link>
       </div>
 
-      {isBookModalOpen && (
+      {isBookModalOpen ? (
         <BookFormModal onClose={() => setIsBookModalOpen(false)} />
-      )}
-
-      <article className="list-container__table">
-        {books.length > 0 ? (
-          <table>
-            <thead>
-              <tr>
-                <th>ID do Livro</th>
-                <th>Nome</th>
-                <th>ID do Autor</th>
-                <th>Nº de Páginas</th>
-                <th>Editar</th>
-              </tr>
-            </thead>
-            <tbody>
-              {books.map((book) => (
-                <tr key={book.id}>
-                  <td>{book.id}</td>
-                  <td>{book.name}</td>
-                  <td>{book.authorId}</td>
-                  <td>{book.pages || "N/A"}</td>
-                  <td>
-                    <button
-                      className="delete-button"
-                      onClick={() => handleDelete(book.id)}
-                    >
-                      <span className="delete-icon"><img src="../src/assets/imgs/botao-apagar.png" alt="botão de deletar" /></span>
-                    </button>
-                  </td>
+      ) : (
+        <article className="list-container__table">
+          {books.length > 0 ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>ID do Livro</th>
+                  <th>Nome</th>
+                  <th>ID do Autor</th>
+                  <th>Nº de Páginas</th>
+                  <th>Editar</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <div className="list-container__table-not-found">
-            <img src="../src/assets/imgs/not-found.png" alt="Não encontrado" />
-          </div>
-        )}
-      </article>
+              </thead>
+              <tbody>
+                {books.map((book) => (
+                  <tr key={book.id}>
+                    <td>{book.id}</td>
+                    <td>{book.name}</td>
+                    <td>{book.authorId}</td>
+                    <td>{book.pages || "N/A"}</td>
+                    <td>
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDelete(book.id)}
+                      >
+                        <span className="delete-icon">
+                          <img
+                            src="../src/assets/imgs/botao-apagar.png"
+                            alt="botão de deletar"
+                          />
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div className="list-container__table-not-found">
+              <img
+                src="../src/assets/imgs/not-found.png"
+                alt="Não encontrado"
+              />
+            </div>
+          )}
+        </article>
+      )}
     </section>
   );
 };

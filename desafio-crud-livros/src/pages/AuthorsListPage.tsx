@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import "../assets/css/list-page.css";
 import "../assets/css/table.css";
 import AuthorFormModal from "../components/AuthorFormModal";
+import AuthorDetailsModal from "../components/AuthorDetailsModal";
 import { Author } from "../types";
 
 function AuthorsListPage() {
   const [isAuthorModalOpen, setIsAuthorModalOpen] = useState(false);
   const [authors, setAuthors] = useState<Author[]>([]);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [selectedAuthor, setSelectedAuthor] = useState<Author | null>(null);
 
   useEffect(() => {
     if (authors.length === 0) {
@@ -34,6 +37,11 @@ function AuthorsListPage() {
     }
   };
 
+  const handleViewDetails = (author: Author) => {
+    setSelectedAuthor(author);
+    setIsDetailsOpen(true);
+  }
+
   return (
     <section className="list-container">
       <div className="list-container__title">
@@ -51,8 +59,18 @@ function AuthorsListPage() {
           <button>Voltar</button>
         </Link>
       </div>
+   
+      {/**  
+       * 
+       * Aqui utiliza-se um ternário para verificar qual dos modais está aberto 
+       * Caso o modal com os detalhes esteja aberto, o código omite a renderização
+       * da tabela e do modal de adição de autor e assim por diante
+       * 
+       **/}
 
-      {isAuthorModalOpen ? (
+      {isDetailsOpen && selectedAuthor ? (
+        <AuthorDetailsModal author={selectedAuthor} onClose={() => setIsDetailsOpen(false)} />
+      ) : isAuthorModalOpen ? (
         <AuthorFormModal onClose={() => setIsAuthorModalOpen(false)} />
       ) : (
         <article className="list-container__table">
@@ -63,7 +81,8 @@ function AuthorsListPage() {
                   <th>ID do Autor</th>
                   <th>Nome</th>
                   <th>Email</th>
-                  <th>Editar</th>
+                  <th>Deletar</th>
+                  <th>Detalhes</th>
                 </tr>
               </thead>
               <tbody>
@@ -84,6 +103,11 @@ function AuthorsListPage() {
                           />
                         </span>
                       </button>
+                    </td>
+                    <td>
+                    <td>
+                      <button className="details-button" onClick={() => handleViewDetails(author)}>Visualizar</button>
+                    </td>
                     </td>
                   </tr>
                 ))}

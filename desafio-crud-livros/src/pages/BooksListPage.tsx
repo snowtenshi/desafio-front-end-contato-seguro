@@ -1,12 +1,21 @@
-import { useState } from "react";
-import BookFormModal from "../components/BookFormModal";
-import '../assets/css/list-page.css';
-import '../assets/css/global.css';
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import '../assets/css/list-page.css';
+import '../assets/css/table.css';
+import BookFormModal from "../components/BookFormModal";
+import { Book } from "../types";
 
-function BooksListPage() {
+const BooksListPage: React.FC = () => {
 
   const [isBookModalOpen, setIsBookModalOpen] = useState(false);
+  const [books, setBooks] = useState<Book[]>([]);
+
+  useEffect(() => {
+    const storedBooks = localStorage.getItem('books');
+    if(storedBooks) {
+      setBooks(JSON.parse(storedBooks));
+    }
+  }, []);
 
   return (
     <section className="list-container">
@@ -20,6 +29,31 @@ function BooksListPage() {
           <button>Voltar</button>
         </Link>
       </div>
+
+      {books.length > 0 ? (
+        <table className="list-container__table">
+          <thead className="list-container__thead">
+            <tr>
+              <th>ID do Livro</th>
+              <th>Nome</th>
+              <th>ID do Autor</th>
+              <th>Nº de Páginas</th>
+            </tr>
+          </thead>
+          <tbody>
+            {books.map((book) => (
+              <tr key={book.id}>
+                <td>{book.id}</td>
+                <td>{book.name}</td>
+                <td>{book.authorId}</td>
+                <td>{book.pages}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ): (
+        <p>Nenhum livro cadastrado :&#40;</p>
+      )}
 
       {isBookModalOpen && (
         <BookFormModal onClose={() => setIsBookModalOpen(false)} />

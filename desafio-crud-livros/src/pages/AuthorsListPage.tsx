@@ -27,7 +27,11 @@ function AuthorsListPage() {
     const updatedAuthors = authors.filter((author) => author.id !== id);
 
     setAuthors(updatedAuthors);
-    localStorage.setItem("authors", JSON.stringify(updatedAuthors));
+    if (updatedAuthors) {
+      localStorage.setItem("authors", JSON.stringify(updatedAuthors));
+    } else {
+      localStorage.removeItem("authors");
+    }
   };
 
   return (

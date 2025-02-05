@@ -27,7 +27,11 @@ const BooksListPage: React.FC = () => {
     const updatedBooks = books.filter((book) => book.id !== id);
 
     setBooks(updatedBooks);
-    localStorage.setItem("books", JSON.stringify(updatedBooks));
+    if (updatedBooks.length === 0) {
+      localStorage.setItem("books", JSON.stringify(updatedBooks));
+    } else {
+      localStorage.removeItem("books");
+    }
   };
 
   return (

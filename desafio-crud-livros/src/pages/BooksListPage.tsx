@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import "../assets/css/list-page.css";
 import "../assets/css/table.css";
 import BookFormModal from "../components/BookFormModal";
+import BookDetailsModal from "../components/BookDetailsModal";
 import { Book } from "../types";
 
 const BooksListPage: React.FC = () => {
   const [isBookModalOpen, setIsBookModalOpen] = useState(false);
   const [books, setBooks] = useState<Book[]>([]);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
   useEffect(() => {
     if (books.length === 0) {
@@ -34,6 +37,11 @@ const BooksListPage: React.FC = () => {
     }
   };
 
+  const handleViewDetails = (book: Book) => {
+    setSelectedBook(book);
+    setIsDetailsOpen(true);
+  }
+
   return (
     <section className="list-container">
       <div className="list-container__title">
@@ -52,7 +60,18 @@ const BooksListPage: React.FC = () => {
         </Link>
       </div>
 
-      {isBookModalOpen ? (
+
+      {/**  
+       * 
+       * Aqui utiliza-se um ternário para verificar qual dos modais está aberto 
+       * Caso o modal com os detalhes esteja aberto, o código omite a renderização
+       * da tabela e do modal de adição de livro e assim por diante
+       * 
+       **/}
+
+      {isDetailsOpen && selectedBook ? (
+        <BookDetailsModal book={selectedBook} onClose={() => setIsDetailsOpen(false)} />
+      ) : isBookModalOpen ? (
         <BookFormModal onClose={() => setIsBookModalOpen(false)} />
       ) : (
         <article className="list-container__table">
@@ -64,7 +83,8 @@ const BooksListPage: React.FC = () => {
                   <th>Nome</th>
                   <th>ID do Autor</th>
                   <th>Nº de Páginas</th>
-                  <th>Editar</th>
+                  <th>Deletar</th>
+                  <th>Detalhes</th>
                 </tr>
               </thead>
               <tbody>
@@ -86,6 +106,9 @@ const BooksListPage: React.FC = () => {
                           />
                         </span>
                       </button>
+                    </td>
+                    <td>
+                      <button className="details-button" onClick={() => handleViewDetails(book)}>Visualizar</button>
                     </td>
                   </tr>
                 ))}

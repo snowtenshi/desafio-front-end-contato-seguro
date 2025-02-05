@@ -1,0 +1,11 @@
+table {
+  font-family: var(--font-text);
+  width: 50rem;
+  border: 2px solid rgba(143, 146, 146, 0.463);
+  box-shadow: rgba(213, 217, 217, 0.468) 0 10px 10px 0;
+  border-radius: 10px;
+}
+
+th {
+  border-bottom: 2px solid rgba(143, 146, 146, 0.463);
+}

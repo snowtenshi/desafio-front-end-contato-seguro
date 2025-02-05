@@ -13,13 +13,11 @@ const BooksListPage: React.FC = () => {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
   useEffect(() => {
-    if (books.length === 0) {
-      const storedBooks = localStorage.getItem("books");
-      if (storedBooks) {
-        setBooks(JSON.parse(storedBooks));
-      }
+    const storedBooks = localStorage.getItem("books");
+    if (storedBooks) {
+      setBooks(JSON.parse(storedBooks));
     }
-  }, [books]);
+  }, []);
 
   const handleDelete = (id: string) => {
     const confirmDelete = window.confirm(

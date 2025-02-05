@@ -13,13 +13,11 @@ function AuthorsListPage() {
   const [selectedAuthor, setSelectedAuthor] = useState<Author | null>(null);
 
   useEffect(() => {
-    if (authors.length === 0) {
-      const storedAuthors = localStorage.getItem("authors");
-      if (storedAuthors) {
-        setAuthors(JSON.parse(storedAuthors));
-      }
+    const storedAuthors = localStorage.getItem("authors");
+    if (storedAuthors) {
+      setAuthors(JSON.parse(storedAuthors));
     }
-  }, [authors]);
+  }, []);
 
   const handleDelete = (id: string) => {
     const confirmDelete = window.confirm(
@@ -105,9 +103,7 @@ function AuthorsListPage() {
                       </button>
                     </td>
                     <td>
-                    <td>
                       <button className="details-button" onClick={() => handleViewDetails(author)}>Visualizar</button>
-                    </td>
                     </td>
                   </tr>
                 ))}

@@ -82,7 +82,9 @@ const BooksListPage: React.FC = () => {
             </tbody>
           </table>
         ) : (
-          <p>Nenhum livro cadastrado :&#40;</p>
+          <div className="list-container__table-not-found">
+            <img src="../src/assets/imgs/not-found.png" alt="Não encontrado" />
+          </div>
         )}
       </article>
     </section>

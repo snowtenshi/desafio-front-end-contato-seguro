@@ -30,6 +30,10 @@ function BooksListPage() {
         </Link>
       </div>
 
+      {isAuthorModalOpen && (
+        <AuthorFormModal onClose={() => setIsAuthorModalOpen(false)} />
+      )}
+      
       {authors.length > 0 ? (
         <table className="list-container__table">
           <thead>
@@ -51,10 +55,6 @@ function BooksListPage() {
         </table>
       ): (
         <p>Nenhum autor cadastrado :&#40;</p>
-      )}
-
-      {isAuthorModalOpen && (
-        <AuthorFormModal onClose={() => setIsAuthorModalOpen(false)} />
       )}
     </section>
   );

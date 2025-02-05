@@ -30,9 +30,14 @@ const BooksListPage: React.FC = () => {
         </Link>
       </div>
 
+      {isBookModalOpen && (
+        <BookFormModal onClose={() => setIsBookModalOpen(false)} />
+      )}
+
+      <article className="list-container__table">
       {books.length > 0 ? (
-        <table className="list-container__table">
-          <thead className="list-container__thead">
+        <table>
+          <thead>
             <tr>
               <th>ID do Livro</th>
               <th>Nome</th>
@@ -54,10 +59,7 @@ const BooksListPage: React.FC = () => {
       ): (
         <p>Nenhum livro cadastrado :&#40;</p>
       )}
-
-      {isBookModalOpen && (
-        <BookFormModal onClose={() => setIsBookModalOpen(false)} />
-      )}
+      </article>
     </section>
   );
 };

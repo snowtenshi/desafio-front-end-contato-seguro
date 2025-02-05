@@ -8,6 +8,7 @@
   --primary-color: rgb(58, 123, 220);
   --button-color: rgb(25, 159, 227);
   --save-button-color: rgb(25, 227, 49);
+  --delete-button-color: rgb(227, 25, 25);
 }
 
 * {

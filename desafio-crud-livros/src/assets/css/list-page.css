@@ -18,3 +18,12 @@
   font-size: 2.2em;
   color: var(--primary-color);
 }
+
+.delete-button {
+  color: var(--delete-button-color);
+}
+
+img {
+  width: 1em;
+  height: 1em;
+}
